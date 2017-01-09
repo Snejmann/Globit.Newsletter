@@ -1,0 +1,20 @@
+{
+    "description": "Newsletter Module based on Psmb.Newsletter Package",
+    "type": "neos-package",
+    "name": "globit/newsletter",
+    "require": {
+        "typo3/flow": "*",
+        "typo3/neos": "^2.3",
+        "psmb/newsletter": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Globit\\Newsletter": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Globit.Newsletter"
+        }
+    }
+}

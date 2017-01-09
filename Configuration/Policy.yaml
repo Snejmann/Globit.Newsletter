@@ -1,0 +1,12 @@
+privilegeTargets:
+  'TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+        'Globit.Newsletter:BackendModule':
+          matcher: 'method(Globit\Newsletter\Controller\StandardController->.*Action())'
+
+roles:
+
+  'TYPO3.Neos:Editor':
+    privileges:
+      -
+        privilegeTarget: 'Globit.Newsletter:BackendModule'
+        permission: GRANT

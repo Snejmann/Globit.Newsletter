@@ -1,0 +1,11 @@
+TYPO3:
+  Neos:
+    modules:
+      management:
+        submodules:
+          newsletter:
+            label: 'Newsletter'
+            controller: 'Globit\Newsletter\Controller\StandardController'
+            description: 'An Example for implementing Backend Modules'
+            icon: 'icon-envelope'
+            privilegeTarget: 'Globit.Newsletter:BackendModule'

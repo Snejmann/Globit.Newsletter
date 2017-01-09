@@ -1,0 +1,21 @@
+include: resource://TYPO3.TypoScript/Private/TypoScript/Root.ts2
+
+Globit.Newsletter.StandardController.index = Template {
+    templatePath = 'resource://Globit.Newsletter/Private/Templates/Standard/Index.html'
+    layoutRootPath = 'resource://Globit.Newsletter/Private/Layouts/'
+    partialRootPath = 'resource://Globit.Newsletter/Private/Partials/'
+
+    site = ${site}
+    subscribers = ${subscribers}
+    subscriptions = ${subscriptions}
+
+    nodes = ${q(site).find('[instanceof TYPO3.Neos:Document]').get()}
+}
+
+Globit.Newsletter.StandardController.print = Template {
+    templatePath = 'resource://Globit.Newsletter/Private/Templates/Standard/Print.html'
+    layoutRootPath = 'resource://Globit.Newsletter/Private/Layouts/'
+    partialRootPath = 'resource://Globit.Newsletter/Private/Partials/'
+
+    node = ${node}
+}

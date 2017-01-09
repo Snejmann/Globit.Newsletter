@@ -1,0 +1,94 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:neos="http://typo3.org/ns/TYPO3/Neos/ViewHelpers"
+      xmlns:media="http://typo3.org/ns/TYPO3/Media/ViewHelpers">
+
+<f:layout name="Default"/>
+
+<f:section name="Content">
+    <legend>Pages</legend>
+
+    <table class="neos-table">
+        <thead>
+        <tr>
+            <th>Page</th>
+            <th>Testing</th>
+            <th>Send to subscriber list</th>
+        </tr>
+        </thead>
+        <tbody>
+        <f:for each="{nodes}" as="node" iteration="iterator">
+            <tr>
+                <td>{node.properties.title}</td>
+                <td>
+                    <f:form action="test" package="Globit.Newsletter" controller="Standard" arguments="{node:node}">
+                        <f:form.textfield placeholder="mail@example.com" name="mail"/>
+                        <f:form.select options="{subscriptions}" name="subscription" optionValueField="identifier"
+                                       optionLabelField="identifier" />
+                        <button type="submit" class="neos-button"><i class="icon-paper-plane icon-white"></i></button>
+                    </f:form>
+                </td>
+                <td>
+                    <f:form action="bulk" package="Globit.Newsletter" controller="Standard" arguments="{node:node}">
+                        <f:form.select options="{subscriptions}" name="subscription" optionValueField="identifier"
+                                       optionLabelField="identifier" />
+                        <button type="submit" class="neos-button"><i class="icon-paper-plane icon-white"></i></button>
+                    </f:form>
+                </td>
+            </tr>
+        </f:for>
+        </tbody>
+    </table>
+    <legend>Subscriptions</legend>
+    <table class="neos-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>E-Mail</th>
+            <th>Subscriptions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <f:for each="{subscriptions}" as="subscription">
+            <tr class="neos-folder" id="{subscription.identifier}">
+                <td colspan="3" class="neos-priority1">
+                    <strong>{subscription.identifier -> f:format.case(mode:'capital')}</strong>
+                </td>
+                <td class="neos-priority1 neos-aRight">
+                    <i class="fold-toggle icon-white icon-chevron-up" data-toggle="fold-{subscription.identifier}"></i>
+                </td>
+            </tr>
+            <f:for each="{subscription.subscribers}" as="subscriber">
+            <tr class="fold-{subscription.identifier}">
+                <td>{subscriber.name}</td>
+                <td>{subscriber.email}</td>
+                <td>
+                    <f:for each="{subscriber.subscriptions}" as="sub">
+                        <span class="neos-label" title="">
+                            {sub}
+                        </span>
+                    </f:for>
+                </td>
+                <td class="neos-action">
+                    <div class="neos-pull-right">
+                        <a href="#" class="neos-button neos-button-primary">
+                            <i class="icon-pencil icon-white"></i>
+                        </a>
+                        <button class="neos-button neos-button-danger" title="" data-toggle="modal" href="#user-2"
+                                data-neos-toggle="tooltip" data-original-title="Delete user">
+                            <i class="icon-trash icon-white"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </f:for>
+        </f:for>
+        </tbody>
+    </table>
+</f:section>
+
+<f:section name="Footer">
+    <a class="neos-button neos-button-primary" title="Import CSV"
+       href="#tobewritten">Import CSV</a>
+    <a class="neos-button neos-button-success" title="Add Subscriber"
+       href="#tobewritten">Add Subscriber</a>
+</f:section>
